@@ -70,7 +70,7 @@ const NavBar = () => {
                     </Typography>
                 </div>
                 <div className="hidden lg:block">{navList}</div>
-                <Button variant="gradient" color="orange" size="md" className="hidden lg:inline-block">
+                <Button variant="gradient" color="amber" size="md" className="hidden lg:inline-block">
                     <Link>Sign In</Link>
                 </Button>
                 <IconButton
@@ -113,7 +113,7 @@ const NavBar = () => {
             </div>
             <MobileNav open={openNav}>
                 {navList}
-                <Button variant="gradient" color="orange" size="md" fullWidth className="mb-2">
+                <Button variant="gradient" color="amber" size="md" fullWidth className="mb-2">
                     <span>Sign In</span>
                 </Button>
             </MobileNav>
