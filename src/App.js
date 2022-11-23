@@ -3,8 +3,10 @@ import routes from "./Router/Routes/Routes";
 
 const App = () => {
   return (
-    <div>
-      <RouterProvider router={routes} />
+    <div className="container mx-auto">
+      <RouterProvider router={routes} >
+    
+      </RouterProvider>
     </div>
   );
 }
