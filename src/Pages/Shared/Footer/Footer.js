@@ -4,7 +4,7 @@ import footerLogo from '../../../assets/logo.png'
 
 const Footer = () => {
     return (
-        <footer aria-label="Site Footer" className="bg-teal-600 py-16 ">
+        <footer aria-label="Site Footer" className="bg-teal-600 py-16 rounded-lg">
             <div className="mx-auto max-w-5xl px-4 mb-5 sm:px-6 lg:px-8 md:flex items-center justify-between md:gap-1">
                 <div className="flex justify-center items-center text-white gap-4">
                     <img src={footerLogo} alt="" className='w-10 h-10' />
