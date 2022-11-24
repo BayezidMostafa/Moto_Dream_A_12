@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
+import CategoryItems from "../../Pages/Home/CategoryItems/CategoryItems";
 import Home from "../../Pages/Home/Home/Home";
 import ErrorPage from "../../Pages/Shared/ErrorPage/ErrorPage";
 import SignIn from "../../Pages/SignIn/SignIn";
@@ -22,6 +23,10 @@ const routes = createBrowserRouter([
             {
                 path: '/signin',
                 element: <SignIn/>
+            },
+            {
+                path: '/categoryitems/:id',
+                element: <CategoryItems/>
             }
         ]
 

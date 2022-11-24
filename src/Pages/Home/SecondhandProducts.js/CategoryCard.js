@@ -2,27 +2,24 @@ import {
     Card,
     CardHeader,
     CardBody,
-    CardFooter,
-    Typography,
-    Tooltip,
-    Button,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
 const CategoryCard = ({ category }) => {
-    const { picture, title } = category;
+    const { picture, title, _id } = category;
     return (
-        <Card className="">
-            <CardHeader floated={false} className="">
-                <img src={picture} alt="" />
-            </CardHeader>
-            <CardBody className="text-center">
-                <p className="text-3xl font-bold uppercase">{title}</p>
-            </CardBody>
-            <CardFooter className="flex justify-center gap-7 pt-2">
-                <Link className="w-full"><Button fullWidth variant="gradient" color="amber" size="lg">Show All</Button></Link>
-            </CardFooter>
-        </Card>
+        <Link to={`/categoryitems/${_id}`}>
+            <div className="shadow-black hover:shadow-lg duration-300 rounded-xl cursor-pointer">
+                <Card className="">
+                    <CardHeader floated={false} className="">
+                        <img className="w-full" src={picture} alt="" />
+                    </CardHeader>
+                    <CardBody className="text-center">
+                        <p className="text-3xl font-bold uppercase">{title}</p>
+                    </CardBody>
+                </Card>
+            </div>
+        </Link>
     );
 }
 export default CategoryCard;
