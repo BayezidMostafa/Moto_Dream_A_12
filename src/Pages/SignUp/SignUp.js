@@ -87,9 +87,6 @@ const SignUp = () => {
                         <input name="image" type="file" className="border rounded w-full text-sm text-gray-500 file:py-2 file:px-6 file:rounded file:border-1 file:border-gray-400" required />
                         <Input type='email' name="email" color="teal" label="Email" size="lg" />
                         <Input type='password' name="password" color="teal" label="Password" size="lg" />
-                        <div className="-ml-2.5">
-                            <Checkbox color="amber" label="Remember Me" />
-                        </div>
                     </CardBody>
                     <CardFooter className="pt-0">
                         <Button type="submit" variant="gradient" color="amber" fullWidth>
