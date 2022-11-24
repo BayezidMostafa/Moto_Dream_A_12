@@ -20,7 +20,7 @@ const CategoryCard = ({ category }) => {
                 <p className="text-3xl font-bold uppercase">{title}</p>
             </CardBody>
             <CardFooter className="flex justify-center gap-7 pt-2">
-                <Link><Button variant="gradient" color="amber" size="">Show All</Button></Link>
+                <Link className="w-full"><Button fullWidth variant="gradient" color="amber" size="lg">Show All</Button></Link>
             </CardFooter>
         </Card>
     );
