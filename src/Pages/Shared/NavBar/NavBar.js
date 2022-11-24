@@ -9,9 +9,10 @@ import {
 import { Link } from "react-router-dom";
 import Logo from '../../../assets/logo.png'
 import { AuthContext } from "../../../Context/AuthProvider";
+import Loading from "../../../Components/Loading/Loading";
 
 const NavBar = () => {
-    const { user, userLogOut } = useContext(AuthContext)
+    const { user, userLogOut, loading, setLoading } = useContext(AuthContext)
     const [openNav, setOpenNav] = useState(false);
 
     useEffect(() => {
@@ -22,9 +23,18 @@ const NavBar = () => {
     }, []);
 
     const handleLogOut = () => {
+        setLoading(true)
         userLogOut()
-            .then(() => { })
-            .catch(err => console.error(err))
+            .then(() => {
+                setLoading(false)
+            })
+            .catch(err => {
+                console.error(err)
+                setLoading(false)
+            })
+    }
+    if(loading){
+        return <Loading/>
     }
     const navList = (
         <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">

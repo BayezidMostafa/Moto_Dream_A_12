@@ -8,13 +8,19 @@ import {
     Button,
 } from "@material-tailwind/react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import ButtonLoading from "../../Components/ButtonLoading/ButtonLoading";
+import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const SignIn = () => {
     const { logInUser, googleProviderLogin, loading, setLoading } = useContext(AuthContext);
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/';
 
     const handleFormSubmit = event => {
+        setLoading(true)
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
@@ -23,16 +29,31 @@ const SignIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setLoading(false)
+                navigate(from, { replace: true })
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                setLoading(false)
+                console.error(err)
+            })
     }
 
     const handleGoogleLogIn = () => {
+        setLoading(true)
         googleProviderLogin()
             .then(result => {
+                setLoading(false)
                 console.log(result.user);
+                navigate(from, { replace: true })
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                setLoading(false)
+                console.error(err)
+            });
+    }
+
+    if (loading) {
+        return <Loading />
     }
 
     return (
@@ -48,15 +69,17 @@ const SignIn = () => {
                         </div>
                     </CardBody>
                     <CardFooter className="pt-0">
-                        <Button type="submit" variant="gradient" color="amber" fullWidth>
-                            Sign in
+                        <Button className="flex justify-center" type="submit" variant="gradient" color="amber" fullWidth>
+                            {
+                                loading ? <ButtonLoading /> : 'Sign in'
+                            }
                         </Button>
                         <Typography variant="small" className="mt-6 flex justify-center">
                             Don't have an account? <Link className="ml-1 underline hover:text-amber-500 duration-200" to='/signup'>Sign up</Link>
                         </Typography>
                     </CardFooter>
-                    <div className="pb-5 flex items-center justify-center py-3 hover:bg-gray-200 cursor-pointer rounded-xl">
-                        <Link onClick={handleGoogleLogIn}>
+                    <div onClick={handleGoogleLogIn} className="pb-5 flex items-center justify-center py-3 hover:bg-gray-200 cursor-pointer rounded-xl">
+                        <Link>
                             <p className="text-center text-2xl font-semibold">
                                 <span className="text-blue-500">G</span>
                                 <span className="text-red-500">o</span>

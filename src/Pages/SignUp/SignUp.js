@@ -8,14 +8,19 @@ import {
     Button,
 } from "@material-tailwind/react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const SignUp = () => {
     const { createUser, user, updateUserInfo, googleProviderLogin, loading, setLoading } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/';
     console.log(user);
 
     const handleFormSubmit = event => {
+        setLoading(true)
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
@@ -35,18 +40,41 @@ const SignUp = () => {
             .then(result => {
                 const image = result.data.display_url;
                 createUser(email, password)
-                    .then(result => {
+                    .then(() => {
                         const profile = {
                             displayName: name,
                             photoURL: image
                         }
                         updateUserInfo(profile)
-                            .then(() => { })
+                            .then(() => {
+                                setLoading(false)
+                                form.reset()
+                                navigate(from, { replace: true })
+                            })
                             .catch(err => console.error(err));
                     })
-                    .catch(error => console.error(error))
+                    .catch(error => {
+                        setLoading(false)
+                        console.error(error)
+                    })
 
             })
+    }
+    const googleLogin = () => {
+        setLoading(true)
+        googleProviderLogin()
+            .then(result => {
+                setLoading(false)
+                console.log(result.user);
+                navigate(from, { replace: true })
+            })
+            .catch(err => {
+                setLoading(false)
+            })
+    }
+
+    if (loading) {
+        return <Loading />
     }
 
     return (
@@ -71,7 +99,7 @@ const SignUp = () => {
                             Already have an account?<Link className="underline hover:text-amber-500 duration-200 ml-1" to='/signin'>Sign in</Link>
                         </Typography>
                     </CardFooter>
-                    <div className="pb-5 flex items-center justify-center py-3 hover:bg-gray-200 cursor-pointer rounded-xl">
+                    <div onClick={googleLogin} className="pb-5 flex items-center justify-center py-3 hover:bg-gray-200 cursor-pointer rounded-xl">
                         <Link to='/google'>
                             <span className="text-center text-2xl font-semibold">
                                 <span className="text-blue-500">G</span>
