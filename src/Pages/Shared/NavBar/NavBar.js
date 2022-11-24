@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
     Navbar,
     MobileNav,
@@ -8,8 +8,10 @@ import {
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import Logo from '../../../assets/logo.png'
+import { AuthContext } from "../../../Context/AuthProvider";
 
 const NavBar = () => {
+    const { user, userLogOut } = useContext(AuthContext)
     const [openNav, setOpenNav] = useState(false);
 
     useEffect(() => {
@@ -19,13 +21,18 @@ const NavBar = () => {
         );
     }, []);
 
+    const handleLogOut = () => {
+        userLogOut()
+            .then(() => { })
+            .catch(err => console.error(err))
+    }
     const navList = (
         <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <Typography
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <Link to="" style={{textShadow:'0 1px 3px #474747'}} className="flex items-center text-[17px] font-bold text-gray-200">
+                <Link to="" style={{ textShadow: '0 1px 3px #474747' }} className="flex items-center text-[17px] font-bold text-gray-200">
                     Pages
                 </Link>
             </Typography>
@@ -33,7 +40,7 @@ const NavBar = () => {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <Link to="" style={{textShadow:'0 1px 3px #474747'}} className="flex items-center text-[17px] font-bold text-gray-200">
+                <Link to="" style={{ textShadow: '0 1px 3px #474747' }} className="flex items-center text-[17px] font-bold text-gray-200">
                     Account
                 </Link>
             </Typography>
@@ -41,7 +48,7 @@ const NavBar = () => {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <Link to="" style={{textShadow:'0 1px 3px #474747'}} className="flex items-center text-[17px] font-bold text-gray-200">
+                <Link to="" style={{ textShadow: '0 1px 3px #474747' }} className="flex items-center text-[17px] font-bold text-gray-200">
                     Blocks
                 </Link>
             </Typography>
@@ -49,7 +56,7 @@ const NavBar = () => {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <Link to="" style={{textShadow:'0 1px 3px #474747'}} className="flex items-center text-[17px] font-bold text-gray-200">
+                <Link to="" style={{ textShadow: '0 1px 3px #474747' }} className="flex items-center text-[17px] font-bold text-gray-200">
                     Docs
                 </Link>
             </Typography>
@@ -66,13 +73,28 @@ const NavBar = () => {
                         variant="h4"
                         className="mr-4 cursor-pointer py-1.5 font-bold text-white"
                     >
-                        <Link style={{textShadow:'0 1px 5px black'}} to='/'>MOTO DREAM</Link>
+                        <Link style={{ textShadow: '0 1px 5px black' }} to='/'>MOTO DREAM</Link>
                     </Typography>
                 </div>
                 <div className="hidden lg:block">{navList}</div>
-                <Button variant="gradient" color="amber" size="md" className="hidden lg:inline-block">
-                    <Link>Sign In</Link>
-                </Button>
+                {
+                    user?.uid ?
+                        <>
+                            <Link onClick={handleLogOut}>
+                                <Button variant="gradient" color="amber" size="md" className="hidden lg:inline-block">
+                                    Sign out
+                                </Button>
+                            </Link>
+                        </>
+                        :
+                        <>
+                            <Link to='/signin'>
+                                <Button variant="gradient" color="amber" size="md" className="hidden lg:inline-block">
+                                    Sign in
+                                </Button>
+                            </Link>
+                        </>
+                }
                 <IconButton
                     variant="text"
                     className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
