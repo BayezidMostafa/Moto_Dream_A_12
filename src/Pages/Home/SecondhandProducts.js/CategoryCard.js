@@ -6,9 +6,10 @@ import {
 import { Link } from "react-router-dom";
 
 const CategoryCard = ({ category }) => {
-    const { picture, title, _id } = category;
+    const { picture, title, categoryId } = category;
+    
     return (
-        <Link to={`/categoryitems/${_id}`}>
+        <Link to={`/category/${categoryId}`}>
             <div className="shadow-black hover:shadow-lg duration-300 rounded-xl cursor-pointer">
                 <Card className="">
                     <CardHeader floated={false} className="">
