@@ -6,18 +6,20 @@ import {
     Input,
     Checkbox,
     Button,
+    Select,
+    Option,
 } from "@material-tailwind/react";
+import axios from "axios";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const SignUp = () => {
-    const { createUser, user, updateUserInfo, googleProviderLogin, loading, setLoading } = useContext(AuthContext)
+    const { createUser, updateUserInfo, googleProviderLogin, loading, setLoading } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/';
-    console.log(user);
 
     const handleFormSubmit = event => {
         setLoading(true)
@@ -25,9 +27,14 @@ const SignUp = () => {
         const form = event.target;
         const name = form.name.value;
         const image = form.image.files[0]
+        const role = form.role.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, image, email, password);
+        const usersData = {
+            name,
+            email,
+            role
+        }
 
         const formData = new FormData()
         formData.append('image', image)
@@ -37,8 +44,9 @@ const SignUp = () => {
             body: formData,
         })
             .then(res => res.json())
-            .then(result => {
-                const image = result.data.display_url;
+            .then(imgData => {
+                console.log(imgData);
+                const image = imgData.data.display_url;
                 createUser(email, password)
                     .then(() => {
                         const profile = {
@@ -48,10 +56,17 @@ const SignUp = () => {
                         updateUserInfo(profile)
                             .then(() => {
                                 setLoading(false)
-                                form.reset()
+                            })
+                            .catch(err => {
+                                console.error(err)
+                                setLoading(false);
+                            });
+                            axios.post('http://localhost:5000/users', usersData)
+                            .then(data => {
+                                setLoading(false)
                                 navigate(from, { replace: true })
                             })
-                            .catch(err => console.error(err));
+                            
                     })
                     .catch(error => {
                         setLoading(false)
@@ -64,11 +79,21 @@ const SignUp = () => {
         setLoading(true)
         googleProviderLogin()
             .then(result => {
-                setLoading(false)
                 console.log(result.user);
+                const user = {
+                    name: result.user.displayName,
+                    email:result.user.email,
+                    role: 'Buyer'
+                }
+                axios.post('http://localhost:5000/users', user)
+                .then(data => {
+                    console.log(data);
+                    setLoading(false)
+                })
                 navigate(from, { replace: true })
             })
             .catch(err => {
+                console.log(err);
                 setLoading(false)
             })
     }
@@ -85,6 +110,10 @@ const SignUp = () => {
                     <CardBody className="flex flex-col gap-4">
                         <Input type='name' name="name" color="teal" label="Name" size="lg" />
                         <input name="image" type="file" className="border rounded w-full text-sm text-gray-500 file:py-2 file:px-6 file:rounded file:border-1 file:border-gray-400" required />
+                        <select name="role" className="w-full p-2.5 bg-white border border-teal-100 rounded-md shadow-sm outline-none appearance-none focus:border-teal-600">
+                            <option defaultChecked>Buyer</option>
+                            <option>Seller</option>
+                        </select>
                         <Input type='email' name="email" color="teal" label="Email" size="lg" />
                         <Input type='password' name="password" color="teal" label="Password" size="lg" />
                     </CardBody>
@@ -114,3 +143,4 @@ const SignUp = () => {
 }
 
 export default SignUp;
+

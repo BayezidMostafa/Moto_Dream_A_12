@@ -1,10 +1,13 @@
 import { Button } from '@material-tailwind/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaCheckCircle } from "react-icons/fa";
 import { PhotoProvider, PhotoView } from 'react-photo-view';
+import BooingModal from './BookingModal';
 
 const CategoryItem = ({ product }) => {
     const { category_name, condition, description, location, mobile, name, original_price, picture, re_sell_price, seller_email, seller_name, time, verified_seller, year_of_purchase, years_of_used } = product;
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(!open);
     return (
         <div className="flex justify-center mt-5">
             <div className="flex flex-col lg:flex-row rounded-lg bg-white shadow hover:shadow-lg duration-300">
@@ -44,7 +47,8 @@ const CategoryItem = ({ product }) => {
                         <p>Email: {seller_email}</p>
                     </div>
                     <div className='w-full lg:w-1/5 ml-auto mt-5'>
-                        <Button variant='gradient' color='amber' fullWidth>Book Now</Button>
+                        <Button htmlFor="" onClick={handleOpen} variant='gradient' color='amber' fullWidth>Book Now</Button>
+                        <BooingModal handleOpen={handleOpen} product={product} open={open} setOpen={setOpen} />
                     </div>
                 </div>
             </div>
