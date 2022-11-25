@@ -7,6 +7,7 @@ import {
     Checkbox,
     Button,
 } from "@material-tailwind/react";
+import axios from "axios";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ButtonLoading from "../../Components/ButtonLoading/ButtonLoading";
@@ -43,7 +44,16 @@ const SignIn = () => {
         googleProviderLogin()
             .then(result => {
                 setLoading(false)
-                console.log(result.user);
+                const user = {
+                    name: result.user.displayName,
+                    email:result.user.email,
+                    role: 'Buyer'
+                }
+                axios.post('http://localhost:5000/users', user)
+                .then(data => {
+                    console.log(data);
+                    setLoading(false)
+                })
                 navigate(from, { replace: true })
             })
             .catch(err => {
