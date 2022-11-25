@@ -1,4 +1,5 @@
 import React from 'react';
+import Sidebar from '../../Dashboard/Sidebar/Sidebar';
 import AdvertisedItems from '../AdvertisedItems/AdvertisedItems';
 import Banner from '../Banner/Banner';
 import SecondhandProducts from '../SecondhandProducts.js/SecondhandProducts';
