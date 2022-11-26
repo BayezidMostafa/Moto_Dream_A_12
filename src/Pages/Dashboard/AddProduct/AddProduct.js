@@ -35,7 +35,8 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(imgData => {
-                if (imgData.data.success) {
+                console.log(imgData.success);
+                if (imgData.success) {
                     const picture = imgData.data.display_url;
                     const data = {
                         picture,
@@ -55,8 +56,14 @@ const AddProduct = () => {
                     axios.post('http://localhost:5000/addProduct', data, {
                         headers: {
                             'content-type':'application/json',
-                            // authorization
+                            authorization: `Bearer ${localStorage.getItem('moto-token')}`
                         }
+                    })
+                    .then(res => {
+                        console.log(res.data);
+                    })
+                    .catch(err => {
+                        console.error(err);
                     })
                 }
 
