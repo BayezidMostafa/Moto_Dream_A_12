@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation()
 
     if (loading) {
-        return <Loading/>
+        return <div className='min-w-[60vh] flex justify-center items-center'><Loading/></div>
     }
     if (user && user?.uid) {
         return children;

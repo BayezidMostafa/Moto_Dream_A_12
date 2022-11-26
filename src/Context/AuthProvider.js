@@ -23,6 +23,7 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
     const userLogOut = () => {
+        localStorage.removeItem('moto-token')
         setLoading(true)
         return signOut(auth);
     }

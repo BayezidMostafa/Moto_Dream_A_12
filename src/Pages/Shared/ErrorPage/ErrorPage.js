@@ -5,7 +5,6 @@ import { Button } from '@material-tailwind/react';
 
 const ErrorPage = () => {
     const error = useRouteError();
-    console.log(error);
     return (
         <div className='flex justify-center items-center min-h-screen'>
             <div className='flex justify-center flex-col items-center'>

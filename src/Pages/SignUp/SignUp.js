@@ -4,14 +4,12 @@ import {
     CardFooter,
     Typography,
     Input,
-    Checkbox,
     Button,
-    Select,
-    Option,
 } from "@material-tailwind/react";
 import axios from "axios";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { authToken } from "../../Auth/authToken";
 import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
 
@@ -45,10 +43,9 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(imgData => {
-                console.log(imgData);
                 const image = imgData.data.display_url;
                 createUser(email, password)
-                    .then(() => {
+                    .then(result => {
                         const profile = {
                             displayName: name,
                             photoURL: image
@@ -61,12 +58,16 @@ const SignUp = () => {
                                 console.error(err)
                                 setLoading(false);
                             });
-                            axios.post('http://localhost:5000/users', usersData)
-                            .then(data => {
+                        axios.post('http://localhost:5000/users', usersData)
+                            .then(res => {
+                                authToken(usersData);
                                 setLoading(false)
                                 navigate(from, { replace: true })
                             })
-                            
+                            .caches(err => {
+                                console.error(err)
+                            })
+
                     })
                     .catch(error => {
                         setLoading(false)
@@ -82,14 +83,13 @@ const SignUp = () => {
                 console.log(result.user);
                 const user = {
                     name: result.user.displayName,
-                    email:result.user.email,
+                    email: result.user.email,
                     role: 'Buyer'
                 }
                 axios.post('http://localhost:5000/users', user)
-                .then(data => {
-                    console.log(data);
-                    setLoading(false)
-                })
+                    .then(data => {
+                        setLoading(false)
+                    })
                 navigate(from, { replace: true })
             })
             .catch(err => {
@@ -99,7 +99,7 @@ const SignUp = () => {
     }
 
     if (loading) {
-        return <Loading />
+        return <div className="flex justify-center items-center min-h-[71.2vh]"><Loading /></div>
     }
 
     return (
@@ -111,8 +111,8 @@ const SignUp = () => {
                         <Input type='name' name="name" color="teal" label="Name" size="lg" />
                         <input name="image" type="file" className="border rounded w-full text-sm text-gray-500 file:py-2 file:px-6 file:rounded file:border-1 file:border-gray-400" required />
                         <select name="role" className="w-full p-2.5 bg-white border border-teal-100 rounded-md shadow-sm outline-none appearance-none focus:border-teal-600">
-                            <option defaultChecked>Buyer</option>
-                            <option>Seller</option>
+                            <option value='buyer'>Buyer</option>
+                            <option value='seller'>Seller</option>
                         </select>
                         <Input type='email' name="email" color="teal" label="Email" size="lg" />
                         <Input type='password' name="password" color="teal" label="Password" size="lg" />

@@ -33,7 +33,7 @@ export default function BooingModal({ handleOpen, open, setOpen, product }) {
         }
         axios.post('http://localhost:5000/bookedProducts', bookingData)
         .then(data => {
-            console.log(data);
+
         })
     }
 

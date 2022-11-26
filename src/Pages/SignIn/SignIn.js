@@ -11,14 +11,18 @@ import axios from "axios";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ButtonLoading from "../../Components/ButtonLoading/ButtonLoading";
+import { authToken } from "../../Auth/authToken";
 import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
 
+
 const SignIn = () => {
     const { logInUser, googleProviderLogin, loading, setLoading } = useContext(AuthContext);
+
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/';
+
 
     const handleFormSubmit = event => {
         setLoading(true)
@@ -29,9 +33,9 @@ const SignIn = () => {
         logInUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                setLoading(false)
-                navigate(from, { replace: true })
+                authToken(user)
+                navigate(from, { replace: true });
+                setLoading(false);
             })
             .catch(err => {
                 setLoading(false)
@@ -44,16 +48,17 @@ const SignIn = () => {
         googleProviderLogin()
             .then(result => {
                 setLoading(false)
+                authToken(result.user)
                 const user = {
                     name: result.user.displayName,
-                    email:result.user.email,
-                    role: 'Buyer'
+                    email: result.user.email,
+                    role: 'buyer'
                 }
                 axios.post('http://localhost:5000/users', user)
-                .then(data => {
-                    console.log(data);
-                    setLoading(false)
-                })
+                    .then(data => {
+                        console.log(data);
+                        setLoading(false)
+                    })
                 navigate(from, { replace: true })
             })
             .catch(err => {
@@ -63,7 +68,7 @@ const SignIn = () => {
     }
 
     if (loading) {
-        return <Loading />
+        return <div className="flex min-h-[71vh] justify-center items-center"><Loading /></div>
     }
 
     return (

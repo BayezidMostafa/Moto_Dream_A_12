@@ -4,29 +4,33 @@ import { ArrowLeftOnRectangleIcon, Bars3Icon, DocumentPlusIcon, HomeIcon, Rectan
 import { AuthContext } from '../Context/AuthProvider'
 import { Button } from '@material-tailwind/react'
 import { } from '@heroicons/react/24/solid'
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+
 
 const DashboardLayout = () => {
     const { user, userLogOut, loading, setLoading } = useContext(AuthContext)
     const [isActive, setActive] = useState('false')
     const { displayName, photoURL, email } = user;
-    const [userData, setUserData] = useState([])
-    console.log(userData);
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/users?email=${email}`)
-            .then(res => res.json())
-            .then(data => {
-                setUserData(data)
-            })
-    }, [email])
+    const { data: userData = [], isLoading } = useQuery({
+        queryKey: ['user'],
+        queryFn: async () => {
+            const res = await axios.get(`http://localhost:5000/users/${email}`, {
+                headers: {
+                    'content-type':'application/json',
+                    authorization: `bearer ${localStorage.getItem('moto-token')}`
+                }
+            });
+            return res.data
+        }
+    })
+
     const handleSignOut = () => {
-        setLoading(true)
         userLogOut()
             .then(() => {
-                setLoading(false)
             })
             .catch(err => {
-                setLoading(false)
             })
     }
 
@@ -60,7 +64,7 @@ const DashboardLayout = () => {
                 <div className=''>
                     <div className='text-center flex flex-col gap-3'>
                         {
-                            userData?.role === 'Admin' &&
+                            userData?.role === 'admin' &&
                             <>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90 justify-center text-lg py-2 flex items-center' to='/'><HomeIcon className='w-5 h-5 mr-1' />Home</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to=''><UserGroupIcon className='w-5 h-5 mr-1' /> All Seller</Link>
@@ -71,7 +75,7 @@ const DashboardLayout = () => {
                     </div>
                     <div className='text-center flex flex-col gap-3'>
                         {
-                            userData?.role === 'Seller' &&
+                            userData?.role === 'seller' &&
                             <>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90 justify-center text-lg py-2 flex items-center' to='/'><HomeIcon className='w-5 h-5 mr-1' />Home</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/dashboard/addproduct'><DocumentPlusIcon className='w-14 h-14 mr-1' /> Add A Products</Link>
@@ -82,7 +86,7 @@ const DashboardLayout = () => {
                     </div>
                     <div className='text-center flex flex-col gap-3'>
                         {
-                            userData?.role === 'Buyer' &&
+                            userData?.role === 'buyer' &&
                             <>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90 justify-center text-lg py-2 flex items-center' to='/'><HomeIcon className='w-5 h-5 mr-1' />Home</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/'><ShoppingCartIcon className='w-5 h-5 mr-1' /> My Orders</Link>
@@ -90,7 +94,7 @@ const DashboardLayout = () => {
                         }
                     </div>
                 </div>
-                <Button className='flex items-center justify-center' color='teal' size='lg' variant='gradient' fullWidth onClick={handleSignOut}><ArrowLeftOnRectangleIcon className='w-6 h-6 mr-1'/> Sign Out</Button>
+                <Button className='flex items-center justify-center' color='teal' size='lg' variant='gradient' fullWidth onClick={handleSignOut}><ArrowLeftOnRectangleIcon className='w-6 h-6 mr-1' /> Sign Out</Button>
             </div>
         </>
     )

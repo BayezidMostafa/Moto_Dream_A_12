@@ -1,16 +1,29 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Loading from '../../../Components/Loading/Loading';
+
 import CategoryCard from './CategoryCard';
 
 const SecondhandProducts = () => {
-    const [categories, setCategories] = useState([])
-    useEffect(() => {
-        axios.get('http://localhost:5000/category')
-        .then(res => res.data)
-        .then(data => {
-            setCategories(data);
-        })
-    }, [])
+
+
+    const { data: categories = [], isLoading } = useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            const res = await axios.get('http://localhost:5000/category', {
+                headers: {
+                    'content-type':'application/json',
+                    authorization: `bearer ${localStorage.getItem('moto-token')}`
+                }
+            });
+            return res.data
+        }
+    })
+
+    if (isLoading) {
+        return <div className='min-h-[30vh] flex justify-center items-center'><Loading /></div>
+    }
     return (
         <div className='my-10'>
             <p>Product Category: {categories.length}</p>

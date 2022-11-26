@@ -1,11 +1,16 @@
 import React from 'react';
 import { useLoaderData, useNavigation } from 'react-router-dom';
+import Loading from '../../../Components/Loading/Loading';
 import CategoryItem from './CategoryItem';
 
 const CategoryItems = () => {
     const navigation = useNavigation();
+    if (navigation.state === "loading") {
+        <div className='min-h-[70vh] flex justify-center items-center'>
+            <Loading />
+        </div>
+    }
     const products = useLoaderData()
-    console.log(products);
     return (
         <div className='my-10'>
             {
