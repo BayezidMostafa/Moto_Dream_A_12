@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
 import MyProduct from './MyProduct';
 
 const MyAllProducts = () => {
     const { user } = useContext(AuthContext);
-    const { data: myProducts = [], isLoading } = useQuery({
+    const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await axios.get(`http://localhost:5000/myProducts/${user?.email}`, {
@@ -22,14 +22,14 @@ const MyAllProducts = () => {
     return (
         <div>
             <div>
-                <p className='text-center'>You Have Total {myProducts.length} {
+                <p className='text-center text-xl font-bold mt-5'>You Have Total {myProducts.length} {
                         myProducts.length === 1 ? 'Items' : 'Item'
                     }
                 </p>
             </div>
-            <div className='flex justify-center flex-col gap-5 md:max-w-[600px] mx-auto'>
+            <div className='grid md:grid-cols-2 grid-cols-1 lg:w-3/4 mx-auto gap-4'>
                 {
-                    myProducts.map(myProduct => <MyProduct key={myProduct._id} myProduct={myProduct} />)
+                    myProducts.map(myProduct => <MyProduct refetch={refetch} key={myProduct._id} myProduct={myProduct} />)
                 }
             </div>
         </div>

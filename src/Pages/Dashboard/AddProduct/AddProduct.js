@@ -1,7 +1,6 @@
-import { Button, Input, Option, Select, Textarea } from '@material-tailwind/react';
+import { Button, Input, Textarea } from '@material-tailwind/react';
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
-import ButtonLoading from '../../../Components/ButtonLoading/ButtonLoading';
 import LargeButtonLoading from '../../../Components/LargeButtonLoading/LargeButtonLoading';
 import { AuthContext } from '../../../Context/AuthProvider';
 
@@ -57,7 +56,8 @@ const AddProduct = () => {
                         seller_email,
                         mobile,
                         description,
-                        product_status: 'available'
+                        product_status: 'available',
+                        advertisement: false
                     }
                     axios.post('http://localhost:5000/addProduct', data, {
                         headers: {
@@ -69,6 +69,7 @@ const AddProduct = () => {
                         form.reset()
                         console.log(res.data);
                         setLoading(false)
+                        
                     })
                     .catch(err => {
                         setLoading(false)
