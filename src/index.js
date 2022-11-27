@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import AuthProvider from './Context/AuthProvider';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import "swiper/css/bundle";
+import "./Pages/Home/AdvertisedItems/slider.css";
 
 
 const queryClient = new QueryClient();

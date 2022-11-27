@@ -21,7 +21,13 @@ const MyOrders = () => {
 
     return (
         <div>
-            <div><p></p></div>
+            <div>
+                <p style={{textShadow: '0 0 2px teal'}} className='text-xl font-bold text-center mt-8'>
+                    {
+                        orders.length === 0 ? 'Please Order At least 1 Product' : 'Please Proceed To Payment For Grab Your Product!'
+                    }
+                </p>
+            </div>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5 lg:w-4/5 ml-auto'>
                 {
                     orders.map(order => <MyOrder refetch={refetch} key={order._id} order={order} />)

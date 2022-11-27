@@ -11,8 +11,8 @@ const CheckoutForm = ({ order }) => {
 
     const stripe = useStripe();
     const elements = useElements();
-    const { price, email, name, _id, bookingId } = order;
-    console.log(price);
+    const { price, email, name, _id, bookingId, product_name } = order;
+    console.log(order);
 
     useEffect(() => {
         fetch("http://localhost:5000/create-payment-intent", {
@@ -76,7 +76,9 @@ const CheckoutForm = ({ order }) => {
                 price,
                 transactionID: paymentIntent.id,
                 email,
-                orderId: _id
+                orderId: _id,
+                product_name,
+                customer_Name:name
             }
             fetch('http://localhost:5000/payments', {
                 method: 'POST',
