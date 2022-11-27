@@ -79,7 +79,7 @@ const DashboardLayout = () => {
                             <>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90 justify-center text-lg py-2 flex items-center' to='/'><HomeIcon className='w-5 h-5 mr-1' />Home</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/dashboard/addproduct'><DocumentPlusIcon className='w-14 h-14 mr-1' /> Add A Products</Link>
-                                <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/'><RectangleStackIcon className='w-14 h-14 mr-1' /> My All Products</Link>
+                                <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/dashboard/myallproducts'><RectangleStackIcon className='w-14 h-14 mr-1' /> My All Products</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/'><UserGroupIcon className='w-5 h-5 mr-1 ' /> My Buyers</Link>
                             </>
                         }
