@@ -18,7 +18,7 @@ export default function MyProduct({ myProduct, refetch }) {
         fetch(`http://localhost:5000/advertisement/${_id}`, {
             method: 'PUT',
             headers: {
-                authorization: `bearer ${localStorage.getItem('moto-token')}`
+                authorization: `Bearer ${localStorage.getItem('moto-token')}`
             }
         })
             .then(res => res.json())
@@ -30,6 +30,20 @@ export default function MyProduct({ myProduct, refetch }) {
             })
             .catch(err => {
             })
+    }
+
+    const handleProductDelete = () => {
+        fetch(`http://localhost:5000/deleteproduct/${_id}`, {
+            method:"DELETE",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('moto-token')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            refetch()
+            console.log(data);
+        })
     }
 
     return (
@@ -54,7 +68,7 @@ export default function MyProduct({ myProduct, refetch }) {
                     </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-2 justify-between mt-5">
-                    <Button color="red">Delete This Product</Button>
+                    <Button onClick={handleProductDelete} color="red">Delete This Product</Button>
                     {
                         advertisement ? <Button disabled >Advertised</Button> : <Button onClick={makeAdvertisement} >Advertise</Button>
                     }

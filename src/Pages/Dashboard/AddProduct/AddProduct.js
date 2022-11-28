@@ -1,12 +1,31 @@
 import { Button, Input, Textarea } from '@material-tailwind/react';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LargeButtonLoading from '../../../Components/LargeButtonLoading/LargeButtonLoading';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext)
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
+
+    const { data: sellerInfo = [], isLoading } = useQuery({
+        queryKey: ['sellerinfo'],
+        queryFn: async () => {
+            const res = await axios.get(`http://localhost:5000/verifyinformation/${user?.email}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('moto-token')}`
+                }
+            })
+            return res.data
+        }
+    })
+
+    console.log(sellerInfo);
+
+    const { verified } = sellerInfo;
 
     const { displayName, email } = user;
     const time = new Date().toLocaleString()
@@ -22,7 +41,7 @@ const AddProduct = () => {
         const original_price = form.original_price.value;
         const year_of_purchase = form.year_of_purchase.value;
         const condition = form.condition.value;
-        const year_of_used = form.year_of_used.value;
+        const years_of_used = form.year_of_used.value;
         const time = form.time.value;
         const seller_name = form.seller_name.value;
         const seller_email = form.seller_email.value
@@ -50,31 +69,34 @@ const AddProduct = () => {
                         original_price,
                         year_of_purchase,
                         condition,
-                        year_of_used,
+                        years_of_used,
                         time,
                         seller_name,
                         seller_email,
                         mobile,
+                        verified_seller: verified,
                         description,
                         product_status: 'available',
-                        advertisement: false
+                        advertisement: false,
+
                     }
                     axios.post('http://localhost:5000/addProduct', data, {
                         headers: {
-                            'content-type':'application/json',
+                            'content-type': 'application/json',
                             authorization: `Bearer ${localStorage.getItem('moto-token')}`
                         }
                     })
-                    .then(res => {
-                        form.reset()
-                        console.log(res.data);
-                        setLoading(false)
-                        
-                    })
-                    .catch(err => {
-                        setLoading(false)
-                        console.error(err);
-                    })
+                        .then(res => {
+                            form.reset()
+                            console.log(res.data);
+                            setLoading(false)
+                            navigate('/dashboard/myallproducts')
+
+                        })
+                        .catch(err => {
+                            setLoading(false)
+                            console.error(err);
+                        })
                 }
 
             })
@@ -119,7 +141,7 @@ const AddProduct = () => {
                         <Textarea required name='description' color="teal" label="Description" />
                         <div className='md:w-1/4 mt-5'>
                             <Button color='teal' type='submit' fullWidth size='lg'>{
-                               loading ? <span className='flex justify-center'><LargeButtonLoading/></span> : 'Add Product'
+                                loading ? <span className='flex justify-center'><LargeButtonLoading /></span> : 'Add Product'
                             }</Button>
                         </div>
                     </div>

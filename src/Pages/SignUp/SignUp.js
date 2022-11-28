@@ -58,13 +58,17 @@ const SignUp = () => {
                                 console.error(err)
                                 setLoading(false);
                             });
-                        axios.post('http://localhost:5000/users', usersData)
+                        axios.post('http://localhost:5000/users', usersData, {
+                            headers: {
+                                authorization: `Bearer ${localStorage.getItem('moto-token')}`
+                            }
+                        })
                             .then(res => {
                                 authToken(usersData);
                                 setLoading(false)
                                 navigate(from, { replace: true })
                             })
-                            .caches(err => {
+                            .cache(err => {
                                 console.error(err)
                             })
 

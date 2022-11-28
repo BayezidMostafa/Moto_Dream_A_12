@@ -8,11 +8,13 @@ import {
 } from "@material-tailwind/react";
 import { AuthContext } from "../../../Context/AuthProvider";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function BooingModal({ handleOpen, open, setOpen, product }) {
     const { user } = useContext(AuthContext);
     const { email, displayName } = user
     const { name, re_sell_price, picture, _id } = product;
+    const navigate = useNavigate()
 
     const handleModalSubmit = event => {
         event.preventDefault();
@@ -34,8 +36,9 @@ export default function BooingModal({ handleOpen, open, setOpen, product }) {
             bookingId: _id
         }
         axios.post('http://localhost:5000/bookedProducts', bookingData)
-        .then(data => {
-
+        .then(res => {
+            const data = res.data;
+            navigate('/dashboard/myorders')
         })
     }
 

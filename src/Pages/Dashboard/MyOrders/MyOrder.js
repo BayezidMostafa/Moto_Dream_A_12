@@ -11,6 +11,21 @@ import { Link } from "react-router-dom";
 export default function MyOrder({ order, refetch }) {
     const { picture, product_name, price, paid, _id, bookingId } = order;
     console.log(bookingId);
+
+    const handleCancelOrder = () => {
+        fetch(`http://localhost:5000/cancelorder/${_id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('moto-token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch()
+            })
+    }
+
     return (
         <Card className="mt-10">
             <CardHeader color="teal" className="relative">
@@ -31,6 +46,11 @@ export default function MyOrder({ order, refetch }) {
             <div className="mx-4 mb-3">
                 {
                     !paid ? <Link to={`/dashboard/payment/${_id}`}><Button color="teal" variant="gradient" fullWidth>PAY FOR THIS PRODUCT</Button></Link> : <Button color="teal" variant="gradient" fullWidth disabled>PAID</Button>
+                }
+            </div>
+            <div className="mx-4 mb-3">
+                { 
+                    !paid ? <Button onClick={handleCancelOrder} fullWidth color="red">Cancel This Order</Button> : <Button disabled fullWidth color="red">Order Completed</Button>
                 }
             </div>
         </Card>

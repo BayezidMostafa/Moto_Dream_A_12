@@ -6,6 +6,8 @@ import { Button } from '@material-tailwind/react'
 import { } from '@heroicons/react/24/solid'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
+import LargeButtonLoading from '../Components/LargeButtonLoading/LargeButtonLoading'
+
 
 
 const DashboardLayout = () => {
@@ -34,6 +36,7 @@ const DashboardLayout = () => {
             })
     }
 
+
     const handleMenuToggle = () => {
         setActive(!isActive)
     }
@@ -50,8 +53,9 @@ const DashboardLayout = () => {
                 </div>
             </div>
             <div className=''>
-                <div>
-                    <p style={{ textShadow: "0 2px 5px gray" }} className='text-center text-xl font-bold mt-4 sm:text-3xl md:text-4xl text-teal-800'>Welcome To Dashboard {displayName}</p>
+                <div className='text-center'>
+                    <p style={{ textShadow: "0 2px 5px gray" }} className='text-xl font-bold mt-4 sm:text-3xl md:text-4xl lg-text-6xl text-teal-800'>Welcome {displayName}!</p>
+                    <p style={{ textShadow: "0 2px 4px gray" }} className='text-xl font-bold mt-4 sm:text-3xl md:text-4xl lg-text-6xl text-teal-800'>Here is your Dashboard</p>
                 </div>
                 <Outlet />
             </div>
@@ -68,7 +72,7 @@ const DashboardLayout = () => {
                             <>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90 justify-center text-lg py-2 flex items-center' to='/'><HomeIcon className='w-5 h-5 mr-1' />Home</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/dashboard/allseller'><UserGroupIcon className='w-5 h-5 mr-1' /> All Seller</Link>
-                                <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to=''> <UserGroupIcon className='w-5  h-5 mr-1' />  All Buyer</Link>
+                                <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/dashboard/allbuyers'> <UserGroupIcon className='w-5  h-5 mr-1' />  All Buyer</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to=''><ShieldExclamationIcon className='w-14 h-14 mr-1' /> Reported Items</Link>
                             </>
                         }
