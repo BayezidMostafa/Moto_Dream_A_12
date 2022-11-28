@@ -1,6 +1,7 @@
 import { Button } from '@material-tailwind/react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const CheckoutForm = ({ order }) => {
     const [cardError, setCardError] = useState('');
@@ -15,7 +16,7 @@ const CheckoutForm = ({ order }) => {
     console.log(order);
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://a-12-server-side.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -80,7 +81,7 @@ const CheckoutForm = ({ order }) => {
                 product_name,
                 customer_Name:name
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://a-12-server-side.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -92,7 +93,7 @@ const CheckoutForm = ({ order }) => {
                 .then(data => {
                     console.log(data);
                     if (data.acknowledged) {
-                        fetch(`http://localhost:5000/updateproductstatus/${bookingId}`, {
+                        fetch(`https://a-12-server-side.vercel.app/updateproductstatus/${bookingId}`, {
                             method: "PUT",
                             headers: {
                                 'content-type':'application/json',
@@ -102,6 +103,7 @@ const CheckoutForm = ({ order }) => {
                         .then(res => res.json())
                         .then(data => {
                             console.log(data);
+                            toast.success('Thanks For The Payment, Ride Safe')
                             setSuccess('Thanks For The Payment, Ride Safe');
                             setTransactionID(paymentIntent.id);
                         })

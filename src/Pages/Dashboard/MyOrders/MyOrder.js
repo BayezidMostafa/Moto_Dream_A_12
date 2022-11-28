@@ -6,6 +6,7 @@ import {
     Typography,
     Button,
 } from "@material-tailwind/react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 export default function MyOrder({ order, refetch }) {
@@ -13,7 +14,7 @@ export default function MyOrder({ order, refetch }) {
     console.log(bookingId);
 
     const handleCancelOrder = () => {
-        fetch(`http://localhost:5000/cancelorder/${_id}`, {
+        fetch(`https://a-12-server-side.vercel.app/cancelorder/${_id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('moto-token')}`
@@ -21,6 +22,7 @@ export default function MyOrder({ order, refetch }) {
         })
             .then(res => res.json())
             .then(data => {
+                toast.error('Orders Canceled')
                 console.log(data);
                 refetch()
             })

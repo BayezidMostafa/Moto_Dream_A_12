@@ -1,10 +1,11 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const BuyerTable = ({ buyer, refetch }) => {
     const { name, email } = buyer;
 
     const handleBuyerDelete = () => {
-        fetch(`http://localhost:5000/deletebuyer/${email}`, {
+        fetch(`https://a-12-server-side.vercel.app/deletebuyer/${email}`, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json',
@@ -13,6 +14,7 @@ const BuyerTable = ({ buyer, refetch }) => {
         })
             .then(res => res.json())
             .then(data => {
+                toast.success('Buyer Deleted Successfully')
                 console.log(data);
                 refetch()
             })

@@ -8,12 +8,15 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authToken } from "../../Auth/authToken";
 import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
 
 const SignUp = () => {
+    useTitle("SIGN UP")
     const { createUser, updateUserInfo, googleProviderLogin, loading, setLoading } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
@@ -58,12 +61,13 @@ const SignUp = () => {
                                 console.error(err)
                                 setLoading(false);
                             });
-                        axios.post('http://localhost:5000/users', usersData, {
+                        axios.put('https://a-12-server-side.vercel.app/users', usersData, {
                             headers: {
                                 authorization: `Bearer ${localStorage.getItem('moto-token')}`
                             }
                         })
                             .then(res => {
+                                toast.success('Account Created Successfully')
                                 authToken(usersData);
                                 setLoading(false)
                                 navigate(from, { replace: true })
@@ -88,13 +92,15 @@ const SignUp = () => {
                 const user = {
                     name: result.user.displayName,
                     email: result.user.email,
-                    role: 'Buyer'
+                    role: 'buyer'
                 }
-                axios.post('http://localhost:5000/users', user)
+                axios.put('https://a-12-server-side.vercel.app/users', user)
                     .then(data => {
+                        toast.success('Google Log In Successfully')
                         setLoading(false)
+                        authToken(result.user)
+                        navigate(from, { replace: true })
                     })
-                navigate(from, { replace: true })
             })
             .catch(err => {
                 console.log(err);
@@ -130,7 +136,7 @@ const SignUp = () => {
                         </Typography>
                     </CardFooter>
                     <div onClick={googleLogin} className="pb-5 flex items-center justify-center py-3 hover:bg-gray-200 cursor-pointer rounded-xl">
-                        <Link to='/google'>
+                        <Link>
                             <span className="text-center text-2xl font-semibold">
                                 <span className="text-blue-500">G</span>
                                 <span className="text-red-500">o</span>

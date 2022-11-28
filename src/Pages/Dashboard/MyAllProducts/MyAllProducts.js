@@ -2,14 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
+import useTitle from '../../../Hooks/useTitle';
 import MyProduct from './MyProduct';
 
 const MyAllProducts = () => {
+    useTitle('My Products')
     const { user } = useContext(AuthContext);
     const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/myProducts/${user?.email}`, {
+            const res = await axios.get(`https://a-12-server-side.vercel.app/myProducts/${user?.email}`, {
                 headers: {
                     'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('moto-token')}`

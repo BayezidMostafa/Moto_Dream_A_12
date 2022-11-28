@@ -14,7 +14,7 @@ const AdvertisedItems = () => {
     const { data: advertisedData = [], isLoading } = useQuery({
         queryKey: ['advertisement'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/advertised`)
+            const res = await axios.get(`https://a-12-server-side.vercel.app/advertised`)
             return res.data
         }
 
@@ -53,4 +53,4 @@ const AdvertisedItems = () => {
 };
 
 export default AdvertisedItems;
-// http://localhost:5000/category/${params.category_name}
+// https://a-12-server-side.vercel.app/category/${params.category_name}

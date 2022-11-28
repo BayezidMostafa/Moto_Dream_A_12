@@ -7,7 +7,7 @@ const Table = ({ seller, refetch }) => {
 
     const handleSellerVerify = () => {
         console.log(email);
-        fetch(`http://localhost:5000/makeverified/${_id}`, {
+        fetch(`https://a-12-server-side.vercel.app/makeverified/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',
@@ -16,7 +16,7 @@ const Table = ({ seller, refetch }) => {
         })
             .then(res => res.json())
             .then(() => {
-                axios.put(`http://localhost:5000/verifytheseller/${email}`, {
+                axios.put(`https://a-12-server-side.vercel.app/verifytheseller/${email}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('moto-token')}`
                     }
@@ -28,7 +28,7 @@ const Table = ({ seller, refetch }) => {
             })
     }
     const handleSellerDelete = () => {
-        fetch(`http://localhost:5000/deleteseller/${email}`, {
+        fetch(`https://a-12-server-side.vercel.app/deleteseller/${email}`, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json',

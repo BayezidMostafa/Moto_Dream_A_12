@@ -2,7 +2,7 @@ export const authToken = user => {
   const currentUser = {
       email: user.email,
   }
-  fetch(`http://localhost:5000/user/${user?.email}`, {
+  fetch(`https://a-12-server-side.vercel.app/user/${user?.email}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',

@@ -11,7 +11,7 @@ const SecondhandProducts = () => {
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/category', {
+            const res = await axios.get('https://a-12-server-side.vercel.app/category', {
                 headers: {
                     'content-type':'application/json',
                     authorization: `bearer ${localStorage.getItem('moto-token')}`

@@ -15,7 +15,7 @@ export default function MyProduct({ myProduct, refetch }) {
     const { product_status, name, picture, re_sell_price, advertisement, _id } = myProduct
 
     const makeAdvertisement = () => {
-        fetch(`http://localhost:5000/advertisement/${_id}`, {
+        fetch(`https://a-12-server-side.vercel.app/advertisement/${_id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('moto-token')}`
@@ -33,7 +33,7 @@ export default function MyProduct({ myProduct, refetch }) {
     }
 
     const handleProductDelete = () => {
-        fetch(`http://localhost:5000/deleteproduct/${_id}`, {
+        fetch(`https://a-12-server-side.vercel.app/deleteproduct/${_id}`, {
             method:"DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('moto-token')}`

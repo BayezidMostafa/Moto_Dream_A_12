@@ -7,18 +7,21 @@ import { } from '@heroicons/react/24/solid'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import LargeButtonLoading from '../Components/LargeButtonLoading/LargeButtonLoading'
+import useTitle from '../Hooks/useTitle'
+import Loading from '../Components/Loading/Loading'
 
 
 
 const DashboardLayout = () => {
-    const { user, userLogOut, loading, setLoading } = useContext(AuthContext)
+    useTitle("DASHBOARD")
+    const { user, userLogOut } = useContext(AuthContext)
     const [isActive, setActive] = useState('false')
     const { displayName, photoURL, email } = user;
 
     const { data: userData = [], isLoading } = useQuery({
         queryKey: ['user'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/users/${email}`, {
+            const res = await axios.get(`https://a-12-server-side.vercel.app/users/${email}`, {
                 headers: {
                     'content-type':'application/json',
                     authorization: `bearer ${localStorage.getItem('moto-token')}`
@@ -40,6 +43,7 @@ const DashboardLayout = () => {
     const handleMenuToggle = () => {
         setActive(!isActive)
     }
+
     return (
         <>
             <div className='bg-teal-600 text-white flex justify-between lg:hidden'>

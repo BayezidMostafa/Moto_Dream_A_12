@@ -39,7 +39,7 @@ const routes = createBrowserRouter([
             {
                 path: '/category/:category_name',
                 element: <PrivateRoute><CategoryItems/></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/category/${params.category_name}`)
+                loader: ({params}) => fetch(`https://a-12-server-side.vercel.app/category/${params.category_name}`)
             },
             {
                 path: '/blog',
@@ -68,7 +68,7 @@ const routes = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment/>,
-                loader: ({params}) => fetch(`http://localhost:5000/myorder/${params.id}`)
+                loader: ({params}) => fetch(`https://a-12-server-side.vercel.app/myorder/${params.id}`)
             },
             {
                 path: '/dashboard/wishlist',

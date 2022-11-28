@@ -4,8 +4,10 @@ import {
     AccordionHeader,
     AccordionBody,
 } from "@material-tailwind/react";
+import useTitle from "../../../Hooks/useTitle";
 
 function Icon({ id, open }) {
+    useTitle("BLOG")
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"

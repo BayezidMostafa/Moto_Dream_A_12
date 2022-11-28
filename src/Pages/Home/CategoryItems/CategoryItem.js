@@ -1,6 +1,7 @@
 import { Button } from '@material-tailwind/react';
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaCheckCircle } from "react-icons/fa";
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
@@ -28,7 +29,7 @@ const CategoryItem = ({ product }) => {
     }
 
     const handleAddWishList = async () => {
-        fetch(`http://localhost:5000/wishlist`, {
+        fetch(`https://a-12-server-side.vercel.app/wishlist`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',
@@ -38,6 +39,7 @@ const CategoryItem = ({ product }) => {
         })
             .then(res => res.json())
             .then(data => {
+                toast.success('Added In Wishlist')
                 console.log(data);
                 navigate('/dashboard/wishlist')
             })

@@ -1,14 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
+import useTitle from '../../../Hooks/useTitle';
 import BuyerTable from './BuyerTable';
 
 const AllBuyer = () => {
-
+    useTitle('ALL BUYERS')
     const { data: buyers = [], isLoading, refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/allbuyers', {
+            const res = await axios.get('https://a-12-server-side.vercel.app/allbuyers', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('moto-token')}`
                 }

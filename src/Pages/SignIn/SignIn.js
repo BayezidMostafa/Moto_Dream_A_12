@@ -14,9 +14,12 @@ import ButtonLoading from "../../Components/ButtonLoading/ButtonLoading";
 import { authToken } from "../../Auth/authToken";
 import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
+import toast from "react-hot-toast";
 
 
 const SignIn = () => {
+    useTitle('SIGN IN')
     const { logInUser, googleProviderLogin, loading, setLoading } = useContext(AuthContext);
 
     const location = useLocation()
@@ -34,8 +37,9 @@ const SignIn = () => {
             .then(result => {
                 const user = result.user;
                 authToken(user)
-                navigate(from, { replace: true });
+                toast.success('Successfully Signed In')
                 setLoading(false);
+                navigate(from, { replace: true });
             })
             .catch(err => {
                 setLoading(false)
@@ -47,19 +51,31 @@ const SignIn = () => {
         setLoading(true)
         googleProviderLogin()
             .then(result => {
-                setLoading(false)
-                authToken(result.user)
-                const user = {
-                    name: result.user.displayName,
-                    email: result.user.email,
-                    role: 'buyer'
-                }
-                axios.post('http://localhost:5000/users', user)
-                    .then(data => {
-                        console.log(data);
-                        setLoading(false)
+                if (result.user) {
+                    const user = {
+                        name: result?.user.displayName,
+                        email: result?.user.email,
+                        role: 'buyer'
+                    }
+                    fetch('https://a-12-server-side.vercel.app/users', {
+                        method: "PUT",
+                        headers: {
+                            'content-type':'application/json',
+                            authorization: `Bearer ${localStorage.getItem('moto-token')}`
+                        },
+                        body: JSON.stringify(user)
                     })
-                navigate(from, { replace: true })
+                        .then(res => res.json())
+                        .then(data => {
+                            authToken(result.user)
+                            console.log(data);
+                            toast.success('Google Log In Successful')
+                            setLoading(false)
+                            navigate(from, { replace: true })
+                        })
+                }
+
+
             })
             .catch(err => {
                 setLoading(false)

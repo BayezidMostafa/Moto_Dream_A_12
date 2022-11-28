@@ -9,6 +9,7 @@ import {
 import { AuthContext } from "../../../Context/AuthProvider";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function BooingModal({ handleOpen, open, setOpen, product }) {
     const { user } = useContext(AuthContext);
@@ -35,9 +36,10 @@ export default function BooingModal({ handleOpen, open, setOpen, product }) {
             location,
             bookingId: _id
         }
-        axios.post('http://localhost:5000/bookedProducts', bookingData)
+        axios.post('https://a-12-server-side.vercel.app/bookedProducts', bookingData)
         .then(res => {
             const data = res.data;
+            toast.success('Successfully Booked')
             navigate('/dashboard/myorders')
         })
     }

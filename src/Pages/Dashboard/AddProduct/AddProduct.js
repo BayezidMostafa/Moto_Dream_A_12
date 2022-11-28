@@ -5,8 +5,10 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LargeButtonLoading from '../../../Components/LargeButtonLoading/LargeButtonLoading';
 import { AuthContext } from '../../../Context/AuthProvider';
+import useTitle from '../../../Hooks/useTitle';
 
 const AddProduct = () => {
+    useTitle('Add Product')
     const { user } = useContext(AuthContext)
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
@@ -14,7 +16,7 @@ const AddProduct = () => {
     const { data: sellerInfo = [], isLoading } = useQuery({
         queryKey: ['sellerinfo'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/verifyinformation/${user?.email}`, {
+            const res = await axios.get(`https://a-12-server-side.vercel.app/verifyinformation/${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('moto-token')}`
                 }
@@ -80,7 +82,7 @@ const AddProduct = () => {
                         advertisement: false,
 
                     }
-                    axios.post('http://localhost:5000/addProduct', data, {
+                    axios.post('https://a-12-server-side.vercel.app/addProduct', data, {
                         headers: {
                             'content-type': 'application/json',
                             authorization: `Bearer ${localStorage.getItem('moto-token')}`
