@@ -8,6 +8,7 @@ import MyAllProducts from "../../Pages/Dashboard/MyAllProducts/MyAllProducts";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import WIshlist from "../../Pages/Dashboard/Wishlist/WIshlist";
+import Blog from "../../Pages/Home/Blog/Blog";
 import CategoryItems from "../../Pages/Home/CategoryItems/CategoryItems";
 import Home from "../../Pages/Home/Home/Home";
 import ErrorPage from "../../Pages/Shared/ErrorPage/ErrorPage";
@@ -39,6 +40,10 @@ const routes = createBrowserRouter([
                 path: '/category/:category_name',
                 element: <PrivateRoute><CategoryItems/></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/category/${params.category_name}`)
+            },
+            {
+                path: '/blog',
+                element: <Blog/>
             }
         ]
 
