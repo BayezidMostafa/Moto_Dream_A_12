@@ -16,25 +16,12 @@ const Banner = () => {
             >
                 <div className="text-center sm:text-left">
                     <h1 className="text-3xl text-gray-100 font-extrabold sm:text-3xl md:text-4xl uppercase">
-                        Let grab your Dream
+                        Lets grab your Dream
                     </h1>
 
                     <p className="mt-4 max-w-lg sm:text-xl sm:leading-relaxed text-gray-100">
-                        Everything looks better from the inside of a motorcycle helmet.
+                    You do not need a therapist if you own a motorcycle, any kind of motorcycle! <br /> <span style={{textShadow:"0 0px 1px gray"}} className='font-semibold text-teal-600'>Dan Aykroyd</span>
                     </p>
-
-                    <div className="mt-8 flex flex-wrap gap-4">
-                        <Link
-                            className="block w-full rounded sm:w-auto"
-                        >
-                            <Button variant='gradient' color='amber'>Get Started</Button>
-                        </Link>
-                        <Link
-                            className="block w-full rounded sm:w-auto"
-                        >
-                            <Button variant='gradient' color='amber'>Learn More</Button>
-                        </Link>
-                    </div>
                 </div>
             </div>
         </section>
