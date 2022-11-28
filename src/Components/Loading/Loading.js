@@ -3,7 +3,7 @@ import { MoonLoader } from 'react-spinners';
 
 const Loading = () => {
     return (
-        <div>
+        <div className='inline'>
             <MoonLoader color="#008080" />
         </div>
     );

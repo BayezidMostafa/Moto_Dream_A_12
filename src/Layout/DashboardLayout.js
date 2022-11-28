@@ -67,7 +67,7 @@ const DashboardLayout = () => {
                             userData?.role === 'admin' &&
                             <>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90 justify-center text-lg py-2 flex items-center' to='/'><HomeIcon className='w-5 h-5 mr-1' />Home</Link>
-                                <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to=''><UserGroupIcon className='w-5 h-5 mr-1' /> All Seller</Link>
+                                <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/dashboard/allseller'><UserGroupIcon className='w-5 h-5 mr-1' /> All Seller</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to=''> <UserGroupIcon className='w-5  h-5 mr-1' />  All Buyer</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to=''><ShieldExclamationIcon className='w-14 h-14 mr-1' /> Reported Items</Link>
                             </>
@@ -90,6 +90,7 @@ const DashboardLayout = () => {
                             <>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90 justify-center text-lg py-2 flex items-center' to='/'><HomeIcon className='w-5 h-5 mr-1' />Home</Link>
                                 <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/dashboard/myorders'><ShoppingCartIcon className='w-5 h-5 mr-1' /> My Orders</Link>
+                                <Link className='bg-teal-500 text-white px-20 rounded shadow-sm duration-150 hover:shadow-gray-700 hover:bg-opacity-90  text-lg py-2 flex justify-center items-center' to='/dashboard/wishlist'><ShoppingCartIcon className='w-5 h-5 mr-1' />My Wishlist</Link>
                             </>
                         }
                     </div>

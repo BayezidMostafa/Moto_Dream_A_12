@@ -11,7 +11,6 @@ export const authToken = user => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         //Save token in LocalStorage
         localStorage.setItem('moto-token', data.token)
       })

@@ -2,14 +2,17 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
+import AllSeller from "../../Pages/Dashboard/AllSeller/AllSeller";
 import MyAllProducts from "../../Pages/Dashboard/MyAllProducts/MyAllProducts";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
+import WIshlist from "../../Pages/Dashboard/Wishlist/WIshlist";
 import CategoryItems from "../../Pages/Home/CategoryItems/CategoryItems";
 import Home from "../../Pages/Home/Home/Home";
 import ErrorPage from "../../Pages/Shared/ErrorPage/ErrorPage";
 import SignIn from "../../Pages/SignIn/SignIn";
 import SignUp from "../../Pages/SignUp/SignUp";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 
@@ -60,6 +63,14 @@ const routes = createBrowserRouter([
                 path: '/dashboard/payment/:id',
                 element: <Payment/>,
                 loader: ({params}) => fetch(`http://localhost:5000/myorder/${params.id}`)
+            },
+            {
+                path: '/dashboard/wishlist',
+                element: <WIshlist/>
+            },
+            {
+                path: '/dashboard/allseller',
+                element: <AdminRoute><AllSeller/></AdminRoute>
             }
         ]
     }
