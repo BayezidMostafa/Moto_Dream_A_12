@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const Table = ({ seller, refetch }) => {
     const { name, email, _id } = seller;
@@ -22,6 +23,7 @@ const Table = ({ seller, refetch }) => {
                     }
                 })
                     .then(res => {
+                        toast.success('Verified Done')
                         refetch()
                         console.log(res.data);
                     })
