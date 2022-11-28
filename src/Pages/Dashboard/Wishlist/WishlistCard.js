@@ -23,7 +23,8 @@ export default function WishlistCard({ list }) {
         product_name,
         price,
         location,
-        booking_id
+        booking_id,
+        name: user?.displayName
     }
 
     const handleOrder = () => {
