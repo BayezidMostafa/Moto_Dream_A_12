@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { MoonLoader } from 'react-spinners';
-import Loading from '../../../Components/Loading/Loading';
 import { AuthContext } from '../../../Context/AuthProvider';
 import useTitle from '../../../Hooks/useTitle';
 import WishlistCard from './WishlistCard';
@@ -15,7 +14,7 @@ const WIshlist = () => {
     const { data: wishlist = [], isLoading } = useQuery({
         queryKey: ['wishlisted'],
         queryFn: async () => {
-            const res = await axios.get(`https://a-12-server-side.vercel.app/wishlisted/${user?.email}`, {
+            const res = await axios.get(`http://localhost:5000/wishlisted/${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('moto-token')}`
                 }

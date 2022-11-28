@@ -1,15 +1,14 @@
 import { Button } from '@material-tailwind/react';
-import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaCheckCircle } from "react-icons/fa";
 import { PhotoProvider, PhotoView } from 'react-photo-view';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import BooingModal from './BookingModal';
 
 const CategoryItem = ({ product }) => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const { category_name, condition, description, location, mobile, name, original_price, picture, re_sell_price, seller_email, seller_name, time, verified_seller, year_of_purchase, years_of_used, _id } = product;
     const [open, setOpen] = useState(false);
     const navigate = useNavigate()
@@ -18,18 +17,14 @@ const CategoryItem = ({ product }) => {
     const wishlistProduct = {
         picture,
         email: user?.email,
-        category_name,
-        name,
-        condition,
-        description,
-        original_price,
-        re_sell_price,
-        product_id: _id
-
+        product_name: name,
+        price: re_sell_price,
+        location,
+        booking_id: _id
     }
 
     const handleAddWishList = async () => {
-        fetch(`https://a-12-server-side.vercel.app/wishlist`, {
+        fetch(`http://localhost:5000/wishlist`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',

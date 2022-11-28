@@ -6,9 +6,7 @@ import { Button } from '@material-tailwind/react'
 import { } from '@heroicons/react/24/solid'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import LargeButtonLoading from '../Components/LargeButtonLoading/LargeButtonLoading'
 import useTitle from '../Hooks/useTitle'
-import Loading from '../Components/Loading/Loading'
 
 
 

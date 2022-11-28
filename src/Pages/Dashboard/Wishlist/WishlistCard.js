@@ -6,20 +6,35 @@ import {
     Typography,
     Button,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider";
 
 export default function WishlistCard({ list }) {
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate()
     const {
+        picture, email, product_name, price, location, booking_id
+    } = list;
+    const data = {
         picture,
         email,
-        category_name,
-        name,
-        condition,
-        description,
-        original_price,
-        re_sell_price,
-        product_id
-    } = list;
+        product_name,
+        price,
+        location,
+        booking_id
+    }
+
+    const handleOrder = () => {
+        axios.post('http://localhost:5000/bookedProducts', data)
+            .then(res => {
+                const data = res.data;
+                navigate('/dashboard/myorders')
+            })
+    }
+
+
     return (
         <Card className="mt-10">
             <CardHeader color="teal" className="relative">
@@ -31,17 +46,14 @@ export default function WishlistCard({ list }) {
             </CardHeader>
             <CardBody className="text-center">
                 <Typography variant="h5" className="mb-2">
-                    {name}
+                    {product_name}
                 </Typography>
                 <Typography>
-                   {description.slice(0, 150)}
-                </Typography>
-                <Typography>
-                   Price: <span className="font-bold">${re_sell_price}</span>
+                    Price: <span className="font-bold">${price}</span>
                 </Typography>
             </CardBody>
             <CardFooter divider className="flex items-center justify-between py-3">
-                <Link className="w-full" to={`/dashboard/payment/${product_id}`}><Button className="" fullWidth>Buy This Product</Button></Link>
+                <Link className="w-full" onClick={handleOrder}><Button className="" color="teal" fullWidth>Order This Product</Button></Link>
             </CardFooter>
         </Card>
     );
