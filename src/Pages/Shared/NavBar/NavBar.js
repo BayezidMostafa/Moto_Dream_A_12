@@ -137,9 +137,22 @@ const NavBar = () => {
             </div>
             <MobileNav open={openNav}>
                 {navList}
-                <Button variant="gradient" color="amber" size="md" fullWidth className="mb-2">
-                    <span>Sign In</span>
-                </Button>
+                {
+                    user?.uid ?
+                        <>
+                            <Button onClick={handleLogOut} variant="gradient" color="amber" size="md" fullWidth className="mb-2">
+                                <span>Sign Out</span>
+                            </Button>
+                        </>
+                        :
+                        <>
+                            <Link to='/signin'>
+                                <Button variant="gradient" color="amber" size="md" fullWidth className="mb-2">
+                                    <span>Sign In</span>
+                                </Button>
+                            </Link>
+                        </>
+                }
             </MobileNav>
         </Navbar>
     );
