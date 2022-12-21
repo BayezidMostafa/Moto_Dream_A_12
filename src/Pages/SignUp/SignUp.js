@@ -84,7 +84,7 @@ const SignUp = () => {
 
             })
     }
-    const googleLogin = () => {
+    const handleGoogleLogIn = () => {
         setLoading(true)
         googleProviderLogin()
             .then(result => {
@@ -114,8 +114,8 @@ const SignUp = () => {
 
     return (
         <div className="min-h-[71.2vh] flex justify-center items-center">
-            <form onSubmit={handleFormSubmit}>
-                <Card className="sm:w-96 shadow-sm shadow-gray-500">
+            <form className="hover:shadow-sm hover:shadow-teal-600 rounded-xl duration-300" onSubmit={handleFormSubmit}>
+                <Card className="min-w-[80vw] sm:min-w-[70vw] md:min-w-[50vw] lg:min-w-[40vw] xl:min-w-[40vw] 2xl:min-w-[22vw] shadow-sm shadow-gray-500">
                     <p className="text-center text-3xl sm:text-5xl font-bold text-teal-500 my-5">Sign Up</p>
                     <CardBody className="flex flex-col gap-4">
                         <Input type='name' name="name" color="teal" label="Name" size="lg" />
@@ -135,15 +135,15 @@ const SignUp = () => {
                             Already have an account?<Link className="underline hover:text-amber-500 duration-200 ml-1" to='/signin'>Sign in</Link>
                         </Typography>
                     </CardFooter>
-                    <div onClick={googleLogin} className="pb-5 flex items-center justify-center py-3 hover:bg-gray-200 cursor-pointer rounded-xl">
+                    <div onClick={handleGoogleLogIn} className="pb-5 flex items-center justify-center py-3 cursor-pointer rounded-xl">
                         <Link>
-                            <span className="text-center text-2xl font-semibold">
-                                <span className="text-blue-500">G</span>
-                                <span className="text-red-500">o</span>
-                                <span className="text-yellow-500">o</span>
-                                <span className="text-blue-500">g</span>
-                                <span className="text-green-500">l</span>
-                                <span className="text-red-500">e</span> sign in</span>
+                            <p className="text-center text-2xl font-semibold">
+                                <span className="text-blue-500 md:hover:text-blue-700 duration-300">G</span>
+                                <span className="text-red-500 md:hover:text-red-700 duration-300">o</span>
+                                <span className="text-yellow-500 md:hover:text-yellow-700 duration-300">o</span>
+                                <span className="text-blue-500 md:hover:text-blue-700 duration-300">g</span>
+                                <span className="text-green-500 md:hover:text-green-700 duration-300">l</span>
+                                <span className="text-red-500 md:hover:text-red-700 duration-300">e</span> sign in</p>
                         </Link>
                     </div>
                 </Card>
