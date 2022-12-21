@@ -15,9 +15,11 @@ import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
 import useTitle from "../../Hooks/useTitle";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 
 const SignIn = () => {
+    const [error, setError] = useState('')
     useTitle('SIGN IN')
     const { logInUser, googleProviderLogin, loading, setLoading } = useContext(AuthContext);
 
@@ -34,6 +36,7 @@ const SignIn = () => {
         const password = form.password.value;
         logInUser(email, password)
             .then(result => {
+                setError('')
                 const user = result.user;
                 authToken(user)
                 toast.success('Successfully Signed In')
@@ -43,6 +46,8 @@ const SignIn = () => {
             .catch(err => {
                 setLoading(false)
                 console.error(err)
+                setError(err.message)
+                console.log(err.message);
             })
     }
 
@@ -50,6 +55,7 @@ const SignIn = () => {
         setLoading(true)
         googleProviderLogin()
             .then(result => {
+                setError('')
                 if (result.user) {
                     const user = {
                         name: result?.user.displayName,
@@ -59,7 +65,7 @@ const SignIn = () => {
                     fetch('https://a-12-server-side.vercel.app/users', {
                         method: "PUT",
                         headers: {
-                            'content-type':'application/json',
+                            'content-type': 'application/json',
                             authorization: `Bearer ${localStorage.getItem('moto-token')}`
                         },
                         body: JSON.stringify(user)
@@ -79,6 +85,7 @@ const SignIn = () => {
             .catch(err => {
                 setLoading(false)
                 console.error(err)
+                setError(err.message);
             });
     }
 
@@ -94,6 +101,16 @@ const SignIn = () => {
                     <CardBody className="flex flex-col gap-4">
                         <Input color="teal" name="email" type='email' label="Email" size="lg" />
                         <Input color="teal" name="password" type='password' label="Password" size="lg" />
+                        {
+                            error ?
+                                <>
+                                    <p className="text-red-500 font-semibold">
+                                        Wrong email or password
+                                    </p>
+                                </>
+                                :
+                                <></>
+                        }
                         <div className="-ml-2.5">
                             <Checkbox color="amber" label="Remember Me" />
                         </div>

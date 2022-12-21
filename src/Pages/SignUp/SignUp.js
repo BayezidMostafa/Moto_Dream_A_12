@@ -7,6 +7,7 @@ import {
     Button,
 } from "@material-tailwind/react";
 import axios from "axios";
+import { useState } from "react";
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -16,6 +17,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 import useTitle from "../../Hooks/useTitle";
 
 const SignUp = () => {
+    const [error, setError] = useState('')
     useTitle("SIGN UP")
     const { createUser, updateUserInfo, googleProviderLogin, loading, setLoading } = useContext(AuthContext)
     const location = useLocation()
@@ -49,6 +51,7 @@ const SignUp = () => {
                 const image = imgData.data.display_url;
                 createUser(email, password)
                     .then(result => {
+                        setError('')
                         const profile = {
                             displayName: name,
                             photoURL: image
@@ -80,6 +83,7 @@ const SignUp = () => {
                     .catch(error => {
                         setLoading(false)
                         console.error(error)
+                        setError(error.message)
                     })
 
             })
@@ -88,6 +92,7 @@ const SignUp = () => {
         setLoading(true)
         googleProviderLogin()
             .then(result => {
+                setError('')
                 console.log(result.user);
                 const user = {
                     name: result.user.displayName,
@@ -103,6 +108,7 @@ const SignUp = () => {
                     })
             })
             .catch(err => {
+                setError(err.message)
                 console.log(err);
                 setLoading(false)
             })
@@ -126,6 +132,16 @@ const SignUp = () => {
                         </select>
                         <Input type='email' name="email" color="teal" label="Email" size="lg" />
                         <Input type='password' name="password" color="teal" label="Password" size="lg" />
+                        {
+                            error ?
+                                <>
+                                    <p className="text-red-500 font-semibold">
+                                        Email already exist
+                                    </p>
+                                </>
+                                :
+                                <></>
+                        }
                     </CardBody>
                     <CardFooter className="pt-0">
                         <Button type="submit" variant="gradient" color="amber" fullWidth>
