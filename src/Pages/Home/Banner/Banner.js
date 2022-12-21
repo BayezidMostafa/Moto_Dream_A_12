@@ -3,7 +3,7 @@ import React from 'react';
 const Banner = () => {
     return (
         <section
-            className="min-h-[50vh] mt-10 rounded-xl relative bg-[url(https://i.ibb.co/jRgkXCs/banner-cover.jpg)] bg-cover bg-center bg-no-repeat shadow-[#009688] shadow-md"
+            className="min-h-[50vh] mt-10 rounded-xl relative bg-[url(https://i.ibb.co/jRgkXCs/banner-cover.jpg)] bg-cover bg-center bg-no-repeat shadow-xl"
         >
             <div
                 className="rounded-xl absolute inset-0 bg-black/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-black/95 sm:to-black/25"

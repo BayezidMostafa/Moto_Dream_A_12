@@ -2,6 +2,7 @@ import React from 'react';
 import useTitle from '../../../Hooks/useTitle';
 import AdvertisedItems from '../AdvertisedItems/AdvertisedItems';
 import Banner from '../Banner/Banner';
+import { Contact } from '../Contact/Contact';
 import Review from '../Review/Review';
 import SecondhandProducts from '../SecondhandProducts.js/SecondhandProducts';
 
@@ -11,14 +12,17 @@ const Home = () => {
         <div>
             <Banner />
             <div className=''>
-                <div className='md:col-span-1'>
+                <div>
                     <AdvertisedItems />
                 </div>
-                <div className='md:col-span-2'>
+                <div>
                     <SecondhandProducts />
                 </div>
                 <div>
                     <Review/>
+                </div>
+                <div>
+                    <Contact/>
                 </div>
             </div>
         </div>

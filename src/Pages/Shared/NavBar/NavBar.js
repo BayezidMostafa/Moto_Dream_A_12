@@ -1,16 +1,20 @@
 import { useState, useEffect, useContext } from "react";
+// import './DarkMode.css'
 import {
     Navbar,
     MobileNav,
     Typography,
     Button,
     IconButton,
+    // Switch,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import Logo from '../../../assets/logo.png'
 import { AuthContext } from "../../../Context/AuthProvider";
+// import useLocalStorage from "use-local-storage";
 
 const NavBar = () => {
+    // const [theme, setTheme] = useLocalStorage("WebsiteTheme", "dark");
     const { user, userLogOut, } = useContext(AuthContext)
     const [openNav, setOpenNav] = useState(false);
 
@@ -29,6 +33,18 @@ const NavBar = () => {
                 console.error(err)
             })
     }
+
+    // const toggleButton = () => {
+    //     if (theme === 'light') {
+    //         setTheme('dark');
+    //     } else {
+    //         setTheme('light');
+    //     }
+    // }
+    // useEffect(() => {
+    //     document.body.className = theme;
+    // }, [theme]);
+
     const navList = (
         <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <Typography
@@ -62,6 +78,16 @@ const NavBar = () => {
                     Blog
                 </Link>
             </Typography>
+            {/* {
+                theme === 'light' ?
+                    <>
+                        <Switch onClick={toggleButton} />
+                    </>
+                    :
+                    <>
+                        <Switch onClick={toggleButton} defaultChecked />
+                    </>
+            } */}
         </ul>
     );
 
@@ -69,7 +95,7 @@ const NavBar = () => {
         <Navbar color="teal" className="mx-auto py-2 px-4 mt-2 lg:px-8 lg:py-4">
             <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
                 <div className="flex items-center gap-3">
-                    <img src={Logo} alt="" className="w-10 h-10" />
+                    <Link to='/'><img src={Logo} alt="" className="w-10 h-10" /></Link>
                     <Typography
                         to=""
                         variant="h4"

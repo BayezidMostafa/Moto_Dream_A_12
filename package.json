@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^3.10.0",
     "@heroicons/react": "^2.0.13",
     "@material-tailwind/react": "^1.2.4",
     "@stripe/react-stripe-js": "^1.15.0",
@@ -24,6 +25,7 @@
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.6",
     "swiper": "^8.4.5",
+    "use-local-storage": "^2.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
