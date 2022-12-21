@@ -32,7 +32,7 @@ export default function Blog() {
 
     return (
         <div className="min-h-[71vh] md:w-2/3 flex flex-col mx-auto justify-center">
-            <div className="border border-teal-600 p-4 rounded-lg">
+            <div className="border border-teal-600 p-3 rounded-lg">
                 <Fragment>
                     <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
                         <AccordionHeader onClick={() => handleOpen(1)}>
