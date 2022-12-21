@@ -4,10 +4,10 @@ const Review = () => {
     return (
         <div className='mb-10'>
             <div>
-                <p style={{ textShadow: "0 0 3px teal" }} className='text-3xl text-center font-bold mb-10'>Here some reviews from our buyers</p>
+                <p style={{ textShadow: "0 0 3px teal" }} className='text-3xl text-center font-bold mb-10 dark:text-gray-300'>Here some reviews from our buyers</p>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-                <div className="container flex flex-col w-full shadow hover:shadow-lg duration-300 rounded-xl max-w-lg p-6 mx-auto divide-y bg-white">
+                <div className="container flex flex-col w-full shadow hover:shadow-lg duration-300 rounded-xl max-w-lg p-6 mx-auto divide-y bg-gray-100 dark:bg-teal-400 dark:text-gray-200">
                     <div className="flex justify-between p-4">
                         <div className="flex space-x-4">
                             <div>
@@ -30,7 +30,7 @@ const Review = () => {
                         <p className='font-semibold'>Date of experience: November 20, 2022</p>
                     </div>
                 </div>
-                <div className="container flex flex-col w-full shadow hover:shadow-lg duration-300 max-w-lg p-6 mx-auto divide-y rounded-md bg-white">
+                <div className="container flex flex-col w-full shadow hover:shadow-lg duration-300 max-w-lg p-6 mx-auto divide-y rounded-md  bg-gray-100 dark:bg-teal-400 dark:text-gray-200">
                     <div className="flex justify-between p-4">
                         <div className="flex space-x-4">
                             <div>
@@ -53,7 +53,7 @@ const Review = () => {
                         <p className='font-semibold'>Date of experience: November 22, 2022</p>
                     </div>
                 </div>
-                <div className="container flex flex-col w-full shadow hover:shadow-lg duration-300 max-w-lg p-6 mx-auto divide-y rounded-md bg-white">
+                <div className="container flex flex-col w-full shadow hover:shadow-lg duration-300 max-w-lg p-6 mx-auto divide-y rounded-md  bg-gray-100 dark:bg-teal-400 dark:text-gray-200">
                     <div className="flex justify-between p-4">
                         <div className="flex space-x-4">
                             <div>

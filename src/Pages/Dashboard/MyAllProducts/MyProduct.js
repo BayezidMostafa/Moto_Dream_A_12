@@ -5,13 +5,10 @@ import {
     Typography,
     Button,
 } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from 'react';
-import { AuthContext } from "../../../Context/AuthProvider";
+import React from 'react';
 import toast from "react-hot-toast";
 
 export default function MyProduct({ myProduct, refetch }) {
-    const { user } = useContext(AuthContext)
     const { product_status, name, picture, re_sell_price, advertisement, _id } = myProduct
 
     const makeAdvertisement = () => {

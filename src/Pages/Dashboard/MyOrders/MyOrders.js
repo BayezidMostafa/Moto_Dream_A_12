@@ -24,7 +24,7 @@ const MyOrders = () => {
     return (
         <div>
             <div>
-                <p style={{textShadow: '0 0 2px teal'}} className='text-xl font-bold text-center mt-8'>
+                <p style={{textShadow: '0 0 2px teal'}} className='text-xl font-bold text-center dark:text-gray-200 mt-8'>
                     {
                         orders.length === 0 ? 'Please Order At least 1 Product' : 'Please Proceed To Payment For Grab Your Product!'
                     }

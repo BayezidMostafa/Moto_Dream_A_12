@@ -105,7 +105,7 @@ const AddProduct = () => {
     }
     return (
         <div className='flex justify-center md:justify-end lg:justify-center my-10'>
-            <div className='border-4 p-10 border-teal-700 rounded-xl shadow hover:shadow-xl hover:shadow-teal-700 duration-300 ease-in-out shadow-teal-700'>
+            <div className='border-4 p-10 border-teal-700 rounded-xl shadow hover:shadow-xl hover:shadow-teal-700 duration-300 ease-in-out bg-gray-100'>
                 <p className='text-center text-4xl font-bold mb-10'>Add Your Product</p>
                 <form onSubmit={handleAddProductFormSubmit} className=''>
                     <div className='grid lg:grid-cols-2 gap-5'>

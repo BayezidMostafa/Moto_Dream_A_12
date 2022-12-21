@@ -26,7 +26,7 @@ const SecondhandProducts = () => {
     }
     return (
         <div className='my-10'>
-            <p style={{textShadow:"0 0 3px teal"}} className='text-3xl text-center font-bold mb-10'>Select Your Category</p>
+            <p style={{textShadow:"0 0 3px teal"}} className='text-3xl text-center font-bold mb-10 dark:text-gray-300'>Select Your Category</p>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5'>
                 {
                     categories.map(category => <CategoryCard key={category._id} category={category} />)

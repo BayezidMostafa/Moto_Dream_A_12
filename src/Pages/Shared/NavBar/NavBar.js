@@ -1,20 +1,20 @@
 import { useState, useEffect, useContext } from "react";
-// import './DarkMode.css'
+import './DarkMode.css'
 import {
     Navbar,
     MobileNav,
     Typography,
     Button,
     IconButton,
-    // Switch,
+    Switch,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import Logo from '../../../assets/logo.png'
 import { AuthContext } from "../../../Context/AuthProvider";
-// import useLocalStorage from "use-local-storage";
+import useLocalStorage from "use-local-storage";
 
 const NavBar = () => {
-    // const [theme, setTheme] = useLocalStorage("WebsiteTheme", "dark");
+    const [theme, setTheme] = useLocalStorage("WebsiteTheme", "dark");
     const { user, userLogOut, } = useContext(AuthContext)
     const [openNav, setOpenNav] = useState(false);
 
@@ -34,16 +34,16 @@ const NavBar = () => {
             })
     }
 
-    // const toggleButton = () => {
-    //     if (theme === 'light') {
-    //         setTheme('dark');
-    //     } else {
-    //         setTheme('light');
-    //     }
-    // }
-    // useEffect(() => {
-    //     document.body.className = theme;
-    // }, [theme]);
+    const toggleButton = () => {
+        if (theme === 'light') {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+    }
+    useEffect(() => {
+        document.body.className = theme;
+    }, [theme]);
 
     const navList = (
         <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -78,16 +78,16 @@ const NavBar = () => {
                     Blog
                 </Link>
             </Typography>
-            {/* {
+            {
                 theme === 'light' ?
                     <>
-                        <Switch onClick={toggleButton} />
+                        <Switch color="teal" onClick={toggleButton} />
                     </>
                     :
                     <>
-                        <Switch onClick={toggleButton} defaultChecked />
+                        <Switch color="brown" onClick={toggleButton} defaultChecked />
                     </>
-            } */}
+            }
         </ul>
     );
 

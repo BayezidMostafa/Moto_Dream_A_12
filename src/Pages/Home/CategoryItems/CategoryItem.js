@@ -43,7 +43,7 @@ const CategoryItem = ({ product }) => {
 
     return (
         <div className="flex justify-center mt-5">
-            <div className="flex flex-col lg:flex-row rounded-lg bg-white shadow hover:shadow-lg duration-300">
+            <div className="flex flex-col lg:flex-row rounded-lg bg-white dark:bg-teal-400 dark:text-white shadow hover:shadow-lg duration-300">
 
                 <PhotoProvider>
                     <PhotoView src={picture}>
@@ -52,7 +52,7 @@ const CategoryItem = ({ product }) => {
                 </PhotoProvider>
                 <div className="p-6 flex flex-col justify-start">
                     <div className='md:flex justify-between'>
-                        <h5 className="text-gray-900 text-xl font-medium mb-2">{name}</h5>
+                        <h5 className="text-xl font-medium mb-2">{name}</h5>
                         <p className="text-[18px]">
                             Seller Name: <span className='font-semibold'>{seller_name}</span>
                             {
@@ -70,7 +70,7 @@ const CategoryItem = ({ product }) => {
                         <p>Used: <span className='font-semibold'>{years_of_used}</span> Years</p>
                         <p>Condition: <span className='font-semibold'>{condition}</span></p>
                     </div>
-                    <p className="text-gray-700 text-base mb-4"><span className='font-semibold'>Description:</span> {description}</p>
+                    <p className="text-base mb-4"><span className='font-semibold'>Description:</span> {description}</p>
                     <div className='md:flex justify-between'>
                         <p className="text-base">Post Time: {time}</p>
                         <p>Phone: {mobile}</p>
@@ -81,7 +81,7 @@ const CategoryItem = ({ product }) => {
                     </div>
                     <div className='lg:flex items-center mt-5'>
                         <div className='w-full lg:w-1/5 mr-auto'>
-                            <Button onClick={handleAddWishList} color='teal' fullWidth>Add To Wishlist</Button>
+                            <Button onClick={handleAddWishList} color='amber' fullWidth>Add To Wishlist</Button>
                         </div>
                         <div className='w-full lg:w-1/5 ml-auto mt-2 lg:mt-0'>
                             <Button htmlFor="" onClick={handleOpen} variant='gradient' color='amber' fullWidth>Book Now</Button>

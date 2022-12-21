@@ -23,6 +23,3 @@ const CategoryItems = () => {
 };
 
 export default CategoryItems;
-
-// const time = new Date().toLocaleString()
-    // console.log(time);

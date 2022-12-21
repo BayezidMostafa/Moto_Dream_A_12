@@ -56,16 +56,16 @@ const DashboardLayout = () => {
             </div>
             <div className=''>
                 <div className='text-center'>
-                    <p style={{ textShadow: "0 2px 5px gray" }} className='text-xl font-bold mt-4 sm:text-3xl md:text-4xl lg-text-6xl text-teal-800'>Welcome {displayName}!</p>
-                    <p style={{ textShadow: "0 2px 4px gray" }} className='text-xl font-bold mt-4 sm:text-3xl md:text-4xl lg-text-6xl text-teal-800'>Here is your Dashboard</p>
+                    <p style={{ textShadow: "0 2px 5px gray" }} className='text-xl font-bold mt-4 sm:text-3xl md:text-4xl lg-text-6xl text-teal-800 dark:text-gray-200'>Welcome {displayName}!</p>
+                    <p style={{ textShadow: "0 2px 4px gray" }} className='text-xl font-bold mt-4 sm:text-3xl md:text-4xl lg-text-6xl text-teal-800 dark:text-gray-200'>Here is your Dashboard</p>
                 </div>
                 <Outlet />
             </div>
             <div className={`z-10 md:fixed overflow-x-hidden bg-teal-600 backdrop-blur-lg shadow-md shadow-teal-500 bg-opacity-10 w-60 sm:w-64 md:w-72 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${isActive && '-translate-x-full'} lg:translate-x-0  transition duration-200 ease-in-out`}>
                 <div className='flex flex-col justify-center items-center'>
                     <Link><img src={photoURL} className="rounded w-36 h-auto mt-3 hover:shadow-xl shadow-black" alt="" /></Link>
-                    <Link className='mt-3 text-2xl font-semibold'>{userData?.name}</Link>
-                    <p className='text-xl font-bold'>{userData.role}</p>
+                    <Link className='mt-3 text-3xl dark:text-gray-200 font-semibold'>{userData?.name}</Link>
+                    <p className='text-[1rem] font-bold dark:text-gray-200 uppercase'>{userData.role}</p>
                 </div>
                 <div className=''>
                     <div className='text-center flex flex-col gap-3'>
